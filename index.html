@@ -45,19 +45,27 @@
             flipBook.style.display = 'block';
 
             const pageFlip = new St.PageFlip(flipBook, {
-                width: 1200, // base page width
-                height: 800, // base page height
-                size: "stretch", // stretch or fixed
+                width: 1200, 
+                height: 800, 
+                size: "stretch", 
                 minWidth: 300,
                 maxWidth: 1200,
                 minHeight: 400,
                 maxHeight: 800,
                 maxShadowOpacity: 0.5,
                 showCover: true,
-                mobileScrollSupport: true // flip pages natively on mobile
+                mobileScrollSupport: true 
             });
 
             pageFlip.loadFromHTML(document.querySelectorAll('.page'));
+
+            // Yahan se Sound Effect ka jadoo shuru hota hai
+            const flipSound = new Audio('https://www.soundjay.com/misc/sounds/page-flip-01a.mp3');
+            
+            pageFlip.on('flip', (e) => {
+                flipSound.currentTime = 0; // Taake jaldi jaldi flip karne par awaaz kategi nahi
+                flipSound.play().catch(error => console.log("Sound play error"));
+            });
         });
     </script>
 </body>
